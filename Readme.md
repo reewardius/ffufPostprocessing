@@ -45,6 +45,20 @@ After it ran, you should have the result file as well as all bodies in your spec
 ```
 ./ffufPostprocessing -result-file /tmp/ffuf/results.json -bodies-folder /tmp/ffuf/bodies/ -delete-bodies -overwrite-result-file 
 ```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/319cc98d-e7cb-482d-8832-76b4ee6afcbb)
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/2709d373-bb42-46b9-bfc0-b19047707ae0)
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/fddc9649-f422-4a9b-9229-b8c9e7d0f277)
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/a6a82621-18d1-4cbf-bd06-55cd4525b8f3)
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/36220145-6077-44bb-a322-841da2a5aa79)
+
+Once GAP finishes. Copy out your links and feed them into file that you will run FFUF against. In my case, I filtered by "/api", "/admin" and "/user". Those are usually juicy.
+```
+./ffuf -w "GAPoutput.txt" -u "FUZZ" -noninteractive -o "/tmp/results.json" -od "/tmp/bodies/" -of json
+./ffufPostprocessing -result-file "/tmp/results.json" -bodies-folder "/tmp/bodies/" -delete-bodies -overwrite-result-file
+jq -r '.results[].url' "/tmp/results.json" | httpx -title -sc -lc -nc -silent | sed 's/[][]//g' | awk '$NF > 60' |egrep '200|301|302'
+jq -r '.results[].url' "/tmp/results.json" | nuclei -tags tokens
+```
+
 
 ## Details
 
