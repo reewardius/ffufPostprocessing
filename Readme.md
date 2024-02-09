@@ -38,8 +38,33 @@ Usage of ./ffufPostprocessing:
 First run ffuf as always - I used a very simple minimalistic command:
 
 ```
-./ffuf -u yourtarget.com/FUZZ -w /path/to/wordlist -o /tmp/ffuf/results.json -od /tmp/ffuf/bodies/ -of json
+gau example.net | unfurl -u paths
 ```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/9498f697-c19e-413a-b7ee-52b5131df10e)
+```
+sed 's#/#\n#g' paths.txt | sort -u
+```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/f917316a-ff16-4335-b11f-5c74cc5322c8)
+```
+gau example.net | unfurl -u keys
+```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/ae9db592-111e-41a5-a22e-36df7837d252)
+
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/fab4d847-96a9-45a2-978c-d98af1f7a472)
+
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/1ba1bed0-cfa7-4485-b74d-a6ab8d01615f)
+```
+curl https://uk.yahoo.com/ -o yahoo.html
+cat yahoo.html | tok | tr '[:upper:]' '[:lower:]' | sort -u > yahoo-words
+```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/744c8921-4b4f-4ddb-b0af-02372a824369)
+
+Fetch JS
+```
+gau example.net | fff -s 200 -s 404 --output yahoo
+find yahoo/ -type f -name '*.body' | html-tool attribs src | grep '\.js$'
+```
+![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/262fdbad-76a7-4d07-b6c2-388e97953f00)
 
 After it ran, you should have the result file as well as all bodies in your specified folders. Now it is time to parse the data and filter out the irrelevant entries:
 ```
