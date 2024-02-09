@@ -66,6 +66,7 @@ find yahoo/ -type f -name '*.body' | html-tool attribs src | grep '\.js$'
 ```
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/262fdbad-76a7-4d07-b6c2-388e97953f00)
 
+Ffuf + FfufPostProcessing + GAP
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/319cc98d-e7cb-482d-8832-76b4ee6afcbb)
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/2709d373-bb42-46b9-bfc0-b19047707ae0)
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/fddc9649-f422-4a9b-9229-b8c9e7d0f277)
@@ -76,8 +77,8 @@ Once GAP finishes. Copy out your links and feed them into file that you will run
 ```
 ./ffuf -w "GAPoutput.txt" -u "FUZZ" -noninteractive -o "/tmp/results.json" -od "/tmp/bodies/" -of json
 ./ffufPostprocessing -result-file "/tmp/results.json" -bodies-folder "/tmp/bodies/" -delete-bodies -overwrite-result-file
-jq -r '.results[].url' "/tmp/results.json" | httpx -title -sc -lc -nc -silent | sed 's/[][]//g' | awk '$NF > 60' |egrep '200|301|302'
-jq -r '.results[].url' "/tmp/results.json" | nuclei -tags tokens
+jq -r '.results[].url' "/tmp/results.json" | httpx -title -sc -lc -nc -silent | sed 's/[][]//g' | awk '$NF > 20' | egrep '200|301|302'
+jq -r '.results[].url' "/tmp/results.json" | nuclei -tags token -es unknown
 ```
 
 
