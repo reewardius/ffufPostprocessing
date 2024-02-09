@@ -66,10 +66,6 @@ find yahoo/ -type f -name '*.body' | html-tool attribs src | grep '\.js$'
 ```
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/262fdbad-76a7-4d07-b6c2-388e97953f00)
 
-After it ran, you should have the result file as well as all bodies in your specified folders. Now it is time to parse the data and filter out the irrelevant entries:
-```
-./ffufPostprocessing -result-file /tmp/ffuf/results.json -bodies-folder /tmp/ffuf/bodies/ -delete-bodies -overwrite-result-file 
-```
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/319cc98d-e7cb-482d-8832-76b4ee6afcbb)
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/2709d373-bb42-46b9-bfc0-b19047707ae0)
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/fddc9649-f422-4a9b-9229-b8c9e7d0f277)
