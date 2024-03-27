@@ -73,7 +73,7 @@ Ffuf + FfufPostProcessing + GAP
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/a6a82621-18d1-4cbf-bd06-55cd4525b8f3)
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/36220145-6077-44bb-a322-841da2a5aa79)
 
-Once GAP finishes. Copy out your links and feed them into file that you will run FFUF against. In my case, I filtered by "/api", "/admin" and "/user". Those are usually juicy.
+Once GAP finishes. Copy out your links and feed them into file that you will run FFUF against. In my case, I filter by "/api", "/admin" and "/user". This is usually the juiciest data.
 ```
 ./ffuf -w "GAPoutput.txt" -u "FUZZ" -noninteractive -o "/tmp/results.json" -od "/tmp/bodies/" -of json
 ./ffufPostprocessing -result-file "/tmp/results.json" -bodies-folder "/tmp/bodies/" -delete-bodies -overwrite-result-file
