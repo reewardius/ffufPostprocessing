@@ -78,7 +78,7 @@ Once GAP finishes. Copy out your links and feed them into file that you will run
 ./ffuf -w "GAPoutput.txt" -u "FUZZ" -noninteractive -o "/tmp/results.json" -od "/tmp/bodies/" -of json
 ./ffufPostprocessing -result-file "/tmp/results.json" -bodies-folder "/tmp/bodies/" -delete-bodies -overwrite-result-file
 jq -r '.results[].url' "/tmp/results.json" | httpx -title -sc -lc -nc -silent | sed 's/[][]//g' | awk '$NF > 20' | egrep '200|301|302'
-jq -r '.results[].url' "/tmp/results.json" | nuclei -tags token -es unknown
+jq -r '.results[].url' "/tmp/results.json" | nuclei -tags token,tokens -es unknown
 ```
 
 
