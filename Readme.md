@@ -66,11 +66,21 @@ find yahoo/ -type f -name '*.body' | html-tool attribs src | grep '\.js$'
 ```
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/262fdbad-76a7-4d07-b6c2-388e97953f00)
 
-Ffuf + FfufPostProcessing + GAP
+# Ffuf + FfufPostProcessing + GAP
+1. Let's collect the domains we are interested in and open them with the [following extension](https://chromewebstore.google.com/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh), pre-launch Burp Suite and configure the proxy in your browser.
+
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/319cc98d-e7cb-482d-8832-76b4ee6afcbb)
+
+2. Send the domains to Crawl.
+
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/2709d373-bb42-46b9-bfc0-b19047707ae0)
+
+3. Add all selected domains that went to Crawl to Burp Suite Scope, then install GAP extension and send results to it.
+
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/fddc9649-f422-4a9b-9229-b8c9e7d0f277)
+
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/a6a82621-18d1-4cbf-bd06-55cd4525b8f3)
+
 ![image](https://github.com/reewardius/ffufPostprocessing/assets/68978608/36220145-6077-44bb-a322-841da2a5aa79)
 
 Once GAP finishes. Copy out your links and feed them into file that you will run FFUF against. In my case, I filter by "/api", "/admin" and "/user". This is usually the juiciest data.
